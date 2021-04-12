@@ -64,7 +64,7 @@ This yields the model summary shown in
 [Base Model Summary](Images/base_model_summary.png). We then compile the model
 using the `binary_crossentropy` loss function, `adam` optimizer, and
 `accuracy` to obtain the training results shown in
-[Base Model Training](Images/base_model_trainin.png). Verifying with the
+[Base Model Training](Images/base_model_training.png). Verifying with the
 testing set, we obtain the following:
 
 - Loss: 0.559
