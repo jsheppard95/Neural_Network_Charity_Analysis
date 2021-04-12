@@ -91,7 +91,7 @@ in each iterative search. This results in the following:
 | Parameter | Search Options | Optimal Value | Loss | Accuracy |
 | --------- | -------------- | ------------- | ---- | -------- |
 | Training Duration (epochs) | [50, 100, 200, 300] | 100 | 0.588 | 0.732 |
-| Architecture | All permutations with one to four hidden layers with 10, 30, 50, and 80 nodes, i.e [(10,), ..., (80,), (10, 30), (30, 10), ..., (80, 50), (10, 30, 50), (10, 50, 30), (30, 10, 50), ..., (80, 50, 30), (10, 30, 50, 80), (10, 30, 80, 50), (10, 50, 30, 80), ..., (80, 50, 30, 10)] | (80, 50, 30), i.e three hidden with 80, 50, and 30 nodes. | 0.561 | 0.740 |
+| Architecture | All permutations with one to four hidden layers with 10, 30, 50, and 80 nodes, i.e [(10,), ..., (80,), (10, 30), (30, 10), ..., (80, 50), (10, 30, 50), (10, 50, 30), (30, 10, 50), ..., (80, 50, 30), (10, 30, 50, 80), (10, 30, 80, 50), (10, 50, 30, 80), ..., (80, 50, 30, 10)] | (80, 50, 30), i.e three hidden layers with 80, 50, and 30 nodes. | 0.561 | 0.740 |
 | Hidden Layer Activation Function | [`relu`, `tanh`, `selu`, `elu`, `exponential`] | `tanh` | 0.556 | 0.734 |
 | Number of Input Features | Bucket all combinations of `APPLICATION_TYPE`, `CLASSIFICATION`, `INCOME_AMT`, and `AFFILIATION`, similar structure as Architecture | Bucket `CLASSIFICATION` only (still drop redundant `SPECIAL_CONSIDERATIONS_N`) resulting in 50 input features. | 0.560 | 0.737 |
 | Learning Rate | Coarse search [0.0001, 0.001, 0.01, 0.1, 1], fine search of six random values between 0.0001 and 0.01 | 0.000594 | 0.546 | 0.737 |
