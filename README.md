@@ -124,7 +124,7 @@ the following parameters:
 | Learning Rate | 0.001 (default) |
 | Training Duration (in epochs) | 100 |
 | Bucket Categorical Variables | No |
-| Batch Size | 32 |
+| Batch Size | 32 (default) |
 
 Rebuilding and training this model, we obtain the summary shown in
 [Optimized Model Summary](Images/optimized_model_summary.png) and training
@@ -135,3 +135,27 @@ the model performance has decreased slightly when faced with the testing data:
 
 - Loss: 0.583
 - Accuracy: 0.727
+
+## Summary
+In summary, we have develop a deep neural network classification model with
+73% accuracy in predicting if loan applicants will be successful from feature
+data contained in [`charity_data.csv`](Resources/charity_data.csv). This does
+not meet the 75% accuracy target, and the optimazation methods employed here
+have not caused significant improvement. 
+
+# Additional Optimazation Methods
+Performance could increase through additional optimization techniques such as
+visualizing the numerical feature variable `ASK_AMT` to find and remove
+potential outliers that could be too noisy. Additionally, one could
+iteratively tune the parameters above and keep optimal values when moving to
+subsequent parameters instead of reverting to the base setting and combining
+after completion. This would however require more careful thought on the order
+with which one should adjust parameters to arrive at an optimized model.
+
+### Alternative Models
+An alternative to the deep learning classification model presented in this
+project could be a more traditional Random Forest Classifier. This model is
+also appropriate for this binary classification problem and can often perform
+comparably to deep learning models with just two hidden layers. It is also
+advantageous in that there are less parameters to optimize and those which do
+require attention are more intuitive than those in a neural network.
