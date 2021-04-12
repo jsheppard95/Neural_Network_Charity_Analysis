@@ -94,4 +94,44 @@ iterative search. This results in the following:
 | Training Duration (in epochs) | [50, 100, 200, 300] | 100 | 0.588 | 0.732 |
 | Architecture | All permutations with one to four hidden layers with 10, 30, 50, and 80 nodes, i.e [(10,), ..., (80,), (10, 30), (30, 10), ..., (80, 50), (10, 30, 50), (10, 50, 30), (30, 10, 50), ..., (80, 50, 30), (10, 30, 50, 80), (10, 30, 80, 50), (10, 50, 30, 80), (10, 50, 80, 30), ..., (80, 50, 30, 10)] | (80, 50, 30), i.e three hidden with 80, 50, and 30 nodes. | 0.561 | 0.740 
 | Hidden Layer Activation Function | `["relu", "tanh", "selu", "elu", "exponential"]` | `tanh` | 0.556 | 0.734 |
-| Number of Input Features | Bucket all combinations of `APPLICATION_TYPE`, `CLASSIFICATION`, `INCOME_AMT`, and `AFFILIATION`, similar options as architecture | Bucket `CLASSIFICATION` only resulting in  | 0. | 0. |
+| Number of Input Features | Bucket all combinations of `APPLICATION_TYPE`, `CLASSIFICATION`, `INCOME_AMT`, and `AFFILIATION`, similar options as architecture | Bucket `CLASSIFICATION` only (still drop redundant `SPECIAL_CONSIDERATIONS_N`) resulting in 50 input features. | 0.560 | 0.737 |
+| Learning Rate | Coarse search [0.0001, 0.001, 0.01, 0.1, 1], fine search of six random values between 0.0001 and 0.01 | 0.000594 | 0.546 | 0.737 |
+
+Combining all optimized model parameters, we retrain and trest and obtain the
+following loss and accuracy:
+
+- Loss: 0.564
+- Accuracy: 0.728
+
+We thus find a negligible decrease in accuracy from the base model defined in
+[`AlphabetSoupCharity.ipynb`](AlphabetSoupCharity.ipynb). As an additional
+attempt at optimization, we perform an iterative search of training
+`batch_size` choosing values `[1, 2, 4, 8, 16, 32, 64]` and keeping the above
+paramters found through their resepective searches. This search shows that a batch
+size of 16 yields the best results with a loss of 0.547 and accuracy of 0.737.
+
+Considering the testing accuracy of each model tested, we find the
+architecture search generated the model with highest testing accuracy and had
+the following parameters:
+
+| Parameter | Value |
+| --------- | ----- |
+| Number of Hidden Layers | 3 |
+| Architecture (hidden_nodes1, hidden_nodes2, hidden_nodes3) | (80, 50, 30) |
+| Hidden Layer Activation Function | `relu` |
+| Number of Output Nodes | 1 |
+| Output Layer Activation Function | `sigmoid` |
+| Learning Rate | 0.001 (default) |
+| Training Duration (in epochs) | 100 |
+| Bucket Categorical Variables | No |
+| Batch Size | 32 |
+
+Rebuilding and training this model, we obtain the summary shown in
+[Optimized Model Summary](Images/optimized_model_summary.png) and training
+results shown in
+[Optimized Model Training](Images/optimized_model_training.png). While in this
+case we continue to see promising training accuracy reaching 0.745, we find
+the model performance has decreased slightly when faced with the testing data:
+
+- Loss: 0.583
+- Accuracy: 0.727
