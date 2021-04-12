@@ -35,11 +35,9 @@ We first preprocess our data set
 [`charity_data.csv`](Resources/charity_data.csv) by reading our data and
 identifying the following target, feature, and identification variables:
 
-    - Target Variable: `IS_SUCCESSFUL`
-    - Feature Variables: `APPLICATION_TYPE`, `AFFILIATION`, `CLASSIFICATION`,
-                         `USE_CASE`, `ORGANIZATION`, `STATUS`, `INCOME_AMT`,
-                         `SPECIAL_CONSIDERATIONS`, `ASK_AMT`
-    - Identifcation Variables (removed): `EIN`, `NAME`
+- Target Variable: `IS_SUCCESSFUL`
+- Feature Variables: `APPLICATION_TYPE`, `AFFILIATION`, `CLASSIFICATION`, `USE_CASE`, `ORGANIZATION`, `STATUS`, `INCOME_AMT`, `SPECIAL_CONSIDERATIONS`, `ASK_AMT`
+- Identifcation Variables (removed): `EIN`, `NAME`
 
 We then encode categorical variables using
 `sklearn.preprocessing.OneHotEncoder` after bucketing noisy features
@@ -56,10 +54,10 @@ with the following parameters:
 
 | Parameter | Value | Justification |
 | --------- | ----- | ------------- |
-| Number of Hidden Layers | 2 | Deep neural network necessary for complex data, good starting point with low computation time. |
-| Architecture (hidden_nodes1, hidden_nodes2, ...) | (80, 30) | First layer has roughly two times number of inputs, smaller second layer provides shorter computation time. |
+| Number of Hidden Layers | 2 | Deep neural network is necessary for complex data, good starting point with low computation time. |
+| Architecture (hidden_nodes1, hidden_nodes2, ...) | (80, 30) | First layer has roughly two times the number of inputs, smaller second layer provides shorter computation time. |
 | Hidden Layer Activation Function | `relu` | Simple choice for inexpensive training with generally good performance. |
-| Number of Output Nodes | 1 | Model is binary classifier and should therfore have one output predicting if `IS_SUCCESSFUL` is `True` or `False`. |
+| Number of Output Nodes | 1 | Model is a binary classifier and should therfore have one output predicting if `IS_SUCCESSFUL` is `True` or `False`. |
 | Output Layer Activation Function | `sigmoid` | Provides a probability output (value between 0 and 1) for the classification of `IS_SUCCESSFUL`. |
 
 This yields the model summary shown in
