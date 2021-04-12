@@ -54,7 +54,7 @@ with the following parameters:
 | Parameter | Value | Justification |
 | --------- | ----- | ------------- |
 | Number of Hidden Layers | 2 | Deep neural network is necessary for complex data, good starting point with low computation time. |
-| Architecture (hidden_nodes1, hidden_nodes2, ...) | (80, 30) | First layer has roughly two times the number of inputs (43), smaller second layer offers shorter computation time. |
+| Architecture (hidden_nodes1, hidden_nodes2) | (80, 30) | First layer has roughly two times the number of inputs (43), smaller second layer offers shorter computation time. |
 | Hidden Layer Activation Function | `relu` | Simple choice for inexpensive training with generally good performance. |
 | Number of Output Nodes | 1 | Model is a binary classifier and should therefore have one output predicting if `IS_SUCCESSFUL` is `True` or `False`. |
 | Output Layer Activation Function | `sigmoid` | Provides a probability output (value between 0 and 1) for the classification of `IS_SUCCESSFUL`. |
@@ -105,7 +105,7 @@ following testing loss and accuracy:
 We thus find a negligible decrease in accuracy from the base model defined in
 [`AlphabetSoupCharity.ipynb`](AlphabetSoupCharity.ipynb). As an additional
 optimization attempt, we perform an iterative search of training batch size
-setting values `[1, 2, 4, 8, 16, 32, 64]` and retaining the previously
+with values `[1, 2, 4, 8, 16, 32, 64]` and retaining the previously
 optimized parameters. This search shows that a batch size of 16 yields the
 best results with a loss of 0.547 and accuracy of 0.737.
 
@@ -137,7 +137,7 @@ data:
 
 ## Summary
 In summary, we present a deep neural network classification model that
-predicts loan applicant success from feature date contained in
+predicts loan applicant success from feature data contained in
 [`charity_data.csv`](Resources/charity_data.csv) with 73% accuracy. This does
 not meet the 75% accuracy target, and the optimization methods employed here
 have not caused significant improvement.
