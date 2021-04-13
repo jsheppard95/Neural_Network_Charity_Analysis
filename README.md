@@ -195,7 +195,7 @@ number of hidden layers and values the number of nodes in each layer. In this
 example there are two hidden layers, the first with 80 nodes and the second
 with 30. The parameter `cat_cutoffs` is a dictionary with keys specifying
 which categorical features should have bucketing and values the minimum number
-of sample value occurences to stay out of the bucket. In this example, if a
+of unique occurences to stay out of the bucket. In this example, if a
 sample's value in `CLASSIFICATION` occurs less than 1800 times, its value is
 changed to `OTHER`. This function returns a tuple
 `(model_loss, model_accuracy)` which in this example is added to `results` for
