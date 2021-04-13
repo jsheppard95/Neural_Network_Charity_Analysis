@@ -158,3 +158,45 @@ also appropriate for this binary classification problem and can often perform
 comparably to deep learning models with just two hidden layers. It is also
 advantageous in that there are less parameters to optimize and those which do
 require attention are more intuitive than those in a neural network.
+
+## Usage
+All code is contained in the Jupyter Notebook files
+[`AlphabetSoupCharity.ipynb`](AlphabetSoupCharity.ipynb) and
+[`AlphabetSoupCharity_Optimization.ipynb`](AlphabetSoupCharity_Optimization.ipynb).
+Therefore to replicate the results of this analysis, clone this repository and
+install the necessary dependencies into an isolated `conda` environment using
+the command:
+```
+conda env create -f environment.yml
+```
+On can then build, train, and test the classification model with baseline
+parameters by opening `AlphabetSoupCharity.ipynb` and running all cells.
+The user can then optimize this model by opening
+`AlphabetSoupCharity_Optimization.ipynb` and either running all cells
+(warning: the architecture and categorical bucketing iterative searches
+complete in roughly one hour), or by using the function `build_train_test`
+to perform additional iterative searches for optimal parameters with the
+following structure:
+```
+In [1]: learning_rates = [0.0001, 0.001, 0.01, 0.1, 1]                          
+
+In [2]: results = []                                                            
+
+In [3]: for rate in learning_rates: 
+   ...:     result = build_train_test(learning_rate=rate, architecture=(80, 30), 
+   ...:                               activation="relu", epochs=100, 
+   ...:                               cat_cutoffs={"CLASSIFICATION": 1800}, 
+   ...:                               batch_size=32) 
+   ...:     results.append(result)
+```
+Here the default values were passed to parameters other than learning rate for
+clarity. The parameter `architecture` is a tuple whose length specifies the
+number of hidden layers and values the number of nodes in each layer. In this
+example there are two hidden layers, the first with 80 nodes and the second
+with 30. The parameter `cat_cutoffs` is a dictionary with keys specifying
+which categorical features should have bucketing and values the minimum number
+of sample value occurences to stay out of the bucket. In this example, if a
+sample's value in `CLASSIFICATION` occurs less than 1800 times, its value is
+changed to `OTHER`. This function returns a tuple
+`(model_loss, model_accuracy)` which in this example is added to `results` for
+later analysis.
